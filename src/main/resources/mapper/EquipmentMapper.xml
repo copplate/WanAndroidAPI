@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.liumybatisplus.mapper.EquipmentMapper">
+    
+    <resultMap id="EquipmentResult" type="com.example.liumybatisplus.entity.Equipment">
+        <result property="id" column="id"/>
+        <result property="equipName" column="equip_name"/>
+        <result property="picUrl" column="pic_url"/>
+    </resultMap>
+
+    <select id="fuzzySearchEquipNameList" parameterType="String" resultMap="EquipmentResult">
+        select * from equipment
+        <if test="equipName != null  and equipName != ''">
+            where equip_name like concat('%',#{equipName}, '%')
+        </if>
+    </select>
+
+</mapper>
